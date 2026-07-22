@@ -1,0 +1,47 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Bookstore API",
+    "version": "1.0.0",
+    "description": "Node.js Bookstore API"
+  },
+  "servers": [
+    { "url": "/api" }
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "summary": "List all books",
+        "operationId": "getAllBooks",
+        "tags": ["Books"],
+        "x-contract-test-stub": "GET /books verifies 200 with non-empty books array",
+        "responses": {
+          "200": {
+            "description": "A list of books",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Book" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "properties": {
+          "bookId": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "publishedYear": { "type": "integer" }
+        }
+      }
+    }
+  }
+}
