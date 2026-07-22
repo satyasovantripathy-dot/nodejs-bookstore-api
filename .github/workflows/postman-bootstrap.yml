@@ -1,0 +1,28 @@
+name: Postman Bootstrap
+
+"on":
+  push:
+    branches:
+      - main
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Resolve Postman service token
+        id: resolve-token
+        uses: postman-cs/postman-resolve-service-token-action@main
+        with:
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+
+      - name: Bootstrap Postman workspace
+        uses: postman-cs/postman-bootstrap-action@main
+        with:
+          spec-path: docs/swagger.json
+          project-name: nodejs-bookstore-api
+          workspace-team-id: '177513'
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
