@@ -1,6 +1,6 @@
 name: Postman Bootstrap
 
-on:
+"on":
   push:
     branches:
       - main
