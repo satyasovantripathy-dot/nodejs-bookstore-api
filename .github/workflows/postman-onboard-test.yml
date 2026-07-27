@@ -1,0 +1,48 @@
+name: Postman Onboarding (test)
+
+# Isolated test of the one-shot composite (bootstrap + repo-sync in one action).
+# Uses a UNIQUE project-name so its workspace/collections are clearly separate
+# from the real st-bookstore-api-new. Insights is OFF, so that phase is skipped.
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  onboard-test:
+    name: onboarding composite (bootstrap + repo-sync)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Resolve Postman service token
+        id: token
+        uses: postman-cs/postman-resolve-service-token-action@v2
+        with:
+          postman-region: us
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+
+      - name: Onboard (composite)
+        id: onboard
+        uses: postman-cs/postman-api-onboarding-action@v2.1.8
+        with:
+          project-name: st-bookstore-onboard-test
+          spec-path: docs/swagger.json
+          workspace-team-id: '177513'
+          postman-region: us
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+          postman-access-token: ${{ steps.token.outputs.token }}
+          generate-ci-workflow: false
+          enable-insights: false
+          github-token: ${{ github.token }}
+
+      - name: Show phase outcomes (which phase worked)
+        if: always()
+        run: |
+          echo "bootstrap-outcome: ${{ steps.onboard.outputs.bootstrap-outcome }}"
+          echo "repo-sync-outcome: ${{ steps.onboard.outputs.repo-sync-outcome }}"
+          echo "insights-outcome:  ${{ steps.onboard.outputs.insights-outcome }}"
+          echo "insights-status:   ${{ steps.onboard.outputs.insights-status }}"
