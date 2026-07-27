@@ -27,7 +27,7 @@ jobs:
 
       - name: Onboard (composite)
         id: onboard
-        uses: postman-cs/postman-api-onboarding-action@v2.1.8
+        uses: postman-cs/postman-api-onboarding-action@v2.3.0
         with:
           project-name: st-bookstore-onboard-test
           spec-path: docs/swagger.json
