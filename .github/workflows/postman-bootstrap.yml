@@ -1,5 +1,9 @@
 name: Postman Bootstrap
 
+# Spec-driven onboarding (model A): on a spec change, bootstrap the Postman
+# workspace from docs/swagger.json, then repo-sync the generated assets back
+# into the repo. Bootstrap's output IDs are wired straight into repo-sync, so
+# no collection IDs are ever hand-entered.
 "on":
   push:
     branches: [main]
@@ -7,9 +11,12 @@ name: Postman Bootstrap
       - 'docs/**'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  bootstrap:
-    name: bootstrap st-bookstore-api-new
+  onboard:
+    name: bootstrap + repo-sync (st-bookstore-api-new)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,6 +30,7 @@ jobs:
           postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
 
       - name: Bootstrap Postman workspace
+        id: bootstrap
         uses: postman-cs/postman-bootstrap-action@v2
         with:
           spec-path: docs/swagger.json
@@ -31,3 +39,19 @@ jobs:
           postman-region: us
           postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
           postman-access-token: ${{ steps.resolve-token.outputs.token }}
+
+      - name: Sync Postman assets back into repo
+        uses: postman-cs/postman-repo-sync-action@v2
+        with:
+          project-name: st-bookstore-api-new
+          workspace-id: ${{ steps.bootstrap.outputs.workspace-id }}
+          spec-id: ${{ steps.bootstrap.outputs.spec-id }}
+          baseline-collection-id: ${{ steps.bootstrap.outputs.baseline-collection-id }}
+          smoke-collection-id: ${{ steps.bootstrap.outputs.smoke-collection-id }}
+          contract-collection-id: ${{ steps.bootstrap.outputs.contract-collection-id }}
+          generate-ci-workflow: false
+          postman-region: us
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+          postman-access-token: ${{ steps.resolve-token.outputs.token }}
+          team-id: ${{ steps.resolve-token.outputs.team-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
