@@ -1,0 +1,9 @@
+$kind: http-request
+id: 8533485d-64c5-4d83-857c-58baf0d09657
+url: "{{baseUrl}}/health"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+examples: ./.resources/Liveness probe.resources/examples
+order: 1000

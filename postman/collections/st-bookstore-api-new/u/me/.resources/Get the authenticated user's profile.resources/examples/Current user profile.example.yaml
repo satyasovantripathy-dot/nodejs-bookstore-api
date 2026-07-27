@@ -1,0 +1,28 @@
+$kind: http-example
+id: 6f42ca80-b0d1-4278-b991-f0fc41f0f1ea
+request:
+  url: "{{baseUrl}}/u/me"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "userId": "string",
+        "username": "string",
+        "email": "jWR@ZuhkgjBucrPIupTmQLHdMFojTvvl.ka",
+        "_id": "string",
+        "role": "admin",
+        "createdAt": "1959-10-24T16:29:46.723Z"
+      }
+order: 1000

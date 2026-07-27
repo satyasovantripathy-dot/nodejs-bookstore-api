@@ -1,0 +1,24 @@
+$kind: http-example
+id: e7609beb-11dc-46d4-a212-419a025d95e3
+request:
+  url: "{{baseUrl}}/u/me"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "status": "string",
+        "message": "string"
+      }
+order: 2000

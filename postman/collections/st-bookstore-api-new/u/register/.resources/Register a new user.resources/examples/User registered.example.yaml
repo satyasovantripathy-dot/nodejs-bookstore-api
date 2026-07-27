@@ -1,0 +1,38 @@
+$kind: http-example
+id: 253c7517-7d4a-4812-b4fc-a532195330c9
+request:
+  url: "{{baseUrl}}/u/register"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      {
+        "username": "string",
+        "email": "P1ppXwD5jAdoL@nTXCnxJZMrgoswbqqcKPodcgdBaKZnUQ.stz",
+        "password": "string"
+      }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "userId": "string",
+        "username": "string",
+        "email": "jWR@ZuhkgjBucrPIupTmQLHdMFojTvvl.ka",
+        "_id": "string",
+        "role": "admin",
+        "createdAt": "1959-10-24T16:29:46.723Z"
+      }
+order: 1000

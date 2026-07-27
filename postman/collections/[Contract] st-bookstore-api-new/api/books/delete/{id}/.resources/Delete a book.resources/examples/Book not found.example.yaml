@@ -1,0 +1,28 @@
+$kind: http-example
+id: d843b9ad-586c-4579-903c-278bbeb41387
+request:
+  url: "{{baseUrl}}/api/books/delete/:id"
+  method: DELETE
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    - key: id
+      value: string
+      description: Resource identifier (Mongo ObjectId)
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "status": "string",
+        "message": "string"
+      }
+order: 2000

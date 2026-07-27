@@ -1,0 +1,22 @@
+$kind: http-request
+id: e82b62b1-36b1-4d22-8aeb-c2a8d80a5f12
+url: "{{baseUrl}}/api/books/addBook"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "bookId": "string",
+      "title": "string",
+      "author": "string",
+      "description": "string",
+      "publishedYear": 8097,
+      "genre": "string",
+      "coverImage": "https://ImpubecrRPkRLZHNQfMAUM.xyuRVYA.DXwBCQ18WYAhtC5dEzvpLxGqbqmZUQV6bPMFDep7UsmaILVkA"
+    }
+settings: {}
+examples: ./.resources/Create a new book.resources/examples
+order: 1000

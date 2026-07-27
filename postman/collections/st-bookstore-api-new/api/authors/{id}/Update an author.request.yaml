@@ -1,0 +1,22 @@
+$kind: http-request
+id: 99adc93d-038a-4895-8ba3-c89ad31da31c
+url: "{{baseUrl}}/api/authors/:id"
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: string
+    description: Resource identifier (Mongo ObjectId)
+body:
+  type: json
+  content: |-
+    {
+      "name": "string",
+      "bio": "string",
+      "birthDate": "1954-09-15"
+    }
+settings: {}
+examples: ./.resources/Update an author.resources/examples
+order: 2000

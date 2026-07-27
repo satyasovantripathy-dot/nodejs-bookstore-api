@@ -1,0 +1,16 @@
+$kind: collection
+id: b4f30d00-c387-467c-8eba-472e2563d271
+description: |-
+  Bookstore microservice API — books, authors, users/auth, and platform ops.
+
+  Contact Support:
+   Name: Bookstore Platform Team
+   Email: satyasovan.tripathy@postman.com
+variables:
+  baseUrl: https://bo-d225e84afdf94a038e1955bfff5e8c50.ecs.us-east-1.on.aws
+auth:
+  - id: e0478131-940b-4c7c-b568-d2490c1292f0
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{bearerToken}}"

@@ -2,5 +2,11 @@ version: 2
 workspace:
   id: 932f09f7-9a12-4bd6-b589-9b56352f9b76
 canonical:
+  collections:
+    ../postman/collections/st-bookstore-api-new: 55002873-03ee9fff-72a3-4e06-80db-63d8d162c219
+    ../postman/collections/[Smoke] st-bookstore-api-new: 55002873-b4f30d00-c387-467c-8eba-472e2563d271
+    ../postman/collections/[Contract] st-bookstore-api-new: 55002873-109bb396-24e6-4fb0-a941-6f587df5586f
   environments:
     ../postman/environments/prod.postman_environment.json: 55002873-475a9d80-5289-4bee-b2d0-d3654e812e38
+  specs:
+    ../docs/swagger.json: 665f5d15-30fd-4d18-85c0-03d4f4c3fa44

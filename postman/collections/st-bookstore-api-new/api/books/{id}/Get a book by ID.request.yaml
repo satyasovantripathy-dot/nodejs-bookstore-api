@@ -1,0 +1,13 @@
+$kind: http-request
+id: 5226f5e0-3d05-4965-9e66-b6e2cc0e4138
+url: "{{baseUrl}}/api/books/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: string
+    description: Resource identifier (Mongo ObjectId)
+settings: {}
+examples: ./.resources/Get a book by ID.resources/examples
+order: 1000

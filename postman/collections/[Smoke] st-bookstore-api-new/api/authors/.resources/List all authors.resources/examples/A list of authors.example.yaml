@@ -1,0 +1,46 @@
+$kind: http-example
+id: 686f2cbb-f8a5-4e8c-a1fd-0555b7e4b46b
+request:
+  url: "{{baseUrl}}/api/authors"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "name": "string",
+          "_id": "string",
+          "bio": "string",
+          "birthDate": "2004-09-23",
+          "books": [
+            "string",
+            "string"
+          ],
+          "createdAt": "1959-11-10T01:19:44.724Z",
+          "updatedAt": "2002-09-18T16:33:25.567Z"
+        },
+        {
+          "name": "string",
+          "_id": "string",
+          "bio": "string",
+          "birthDate": "1996-07-14",
+          "books": [
+            "string",
+            "string"
+          ],
+          "createdAt": "1991-11-01T11:25:51.984Z",
+          "updatedAt": "1988-01-30T20:51:21.140Z"
+        }
+      ]
+order: 1000

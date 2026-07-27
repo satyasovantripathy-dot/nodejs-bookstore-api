@@ -1,0 +1,18 @@
+$kind: http-request
+id: 97ce80d8-da65-422b-aa4b-baa284bc0dd3
+url: "{{baseUrl}}/api/authors"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "string",
+      "bio": "string",
+      "birthDate": "1954-09-15"
+    }
+settings: {}
+examples: ./.resources/Create a new author.resources/examples
+order: 3000

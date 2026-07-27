@@ -1,0 +1,13 @@
+$kind: http-request
+id: 88bb75ae-f719-4256-89c0-b0812eac21ed
+url: "{{baseUrl}}/api/authors/:id"
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: string
+    description: Resource identifier (Mongo ObjectId)
+settings: {}
+examples: ./.resources/Get an author by ID.resources/examples
+order: 1000

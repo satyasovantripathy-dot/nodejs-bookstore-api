@@ -1,0 +1,28 @@
+$kind: http-example
+id: 6960fc73-7c0e-48b7-ad65-6bc9726ab243
+request:
+  url: "{{baseUrl}}/api/authors/:id"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    - key: id
+      value: string
+      description: Resource identifier (Mongo ObjectId)
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "status": "string",
+        "message": "string"
+      }
+order: 2000

@@ -1,0 +1,26 @@
+$kind: http-example
+id: 4c3b6207-6ea5-4477-b6bc-d9ee12dad7d8
+request:
+  url: "{{baseUrl}}/readyz"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "status": "ready",
+        "dependencies": {
+          "database": "connected"
+        }
+      }
+order: 1000

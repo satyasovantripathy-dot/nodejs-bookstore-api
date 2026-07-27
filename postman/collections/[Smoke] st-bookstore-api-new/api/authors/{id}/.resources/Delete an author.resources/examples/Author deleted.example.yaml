@@ -1,0 +1,20 @@
+$kind: http-example
+id: 8c700dae-f162-4571-97f1-76c718f76932
+request:
+  url: "{{baseUrl}}/api/authors/:id"
+  method: DELETE
+  headers:
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    - key: id
+      value: string
+      description: Resource identifier (Mongo ObjectId)
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: ""
+order: 1000

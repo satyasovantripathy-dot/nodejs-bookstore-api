@@ -1,0 +1,13 @@
+$kind: http-request
+id: 3f413d83-671a-4330-bf65-c2421619b91f
+url: "{{baseUrl}}/api/authors/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: string
+    description: Resource identifier (Mongo ObjectId)
+settings: {}
+examples: ./.resources/Delete an author.resources/examples
+order: 3000

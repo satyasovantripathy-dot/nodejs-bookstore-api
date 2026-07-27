@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "collections": [
+    {
+      "role": "baseline",
+      "collectionPath": "postman/collections/st-bookstore-api-new",
+      "cloudId": "55002873-03ee9fff-72a3-4e06-80db-63d8d162c219",
+      "payloadDigest": "6b051875beaf0b54cae11da104640312a9e98b4b96ef46f06d35d3c17a79eadd",
+      "artifactDigest": "033d82350e1e54b02d2a36e78991ed0d7a8e502ad5a5e3c826cde647178a0d19"
+    },
+    {
+      "role": "smoke",
+      "collectionPath": "postman/collections/[Smoke] st-bookstore-api-new",
+      "cloudId": "55002873-b4f30d00-c387-467c-8eba-472e2563d271",
+      "payloadDigest": "4c1a7585393cd060d90cd4705ac255b3608cc8e1c865c5cd880ed0322b2f0d71",
+      "artifactDigest": "be3c963f670ee64d9f24d55dcecefbcd3a2e2919dc3570351f6270561e7806b2"
+    },
+    {
+      "role": "contract",
+      "collectionPath": "postman/collections/[Contract] st-bookstore-api-new",
+      "cloudId": "55002873-109bb396-24e6-4fb0-a941-6f587df5586f",
+      "payloadDigest": "2f442e38b1a6651171c8ec0b7c1e0e8d4a4cbe5c3dc19258e85f8127ad16a0ca",
+      "artifactDigest": "e2bdd2906786f627e0cc1007e9056731fd69e4ba80078f5004ef8a0f7ce23f28"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+$kind: http-request
+id: 167dc10e-a83a-47a4-9e4e-20e18dcc6b70
+url: "{{baseUrl}}/readyz"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+examples: ./.resources/Readiness probe.resources/examples
+order: 1000

@@ -1,0 +1,23 @@
+$kind: http-example
+id: be866350-77be-476e-a14d-fa4fb0a34853
+request:
+  url: "{{baseUrl}}/readyz"
+  method: GET
+  headers:
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+response:
+  statusCode: 503
+  statusText: Service Unavailable
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "status": "not_ready"
+      }
+order: 2000

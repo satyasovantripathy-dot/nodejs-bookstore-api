@@ -1,0 +1,46 @@
+$kind: http-example
+id: a2a5d034-bee2-46a4-b1c7-b774544be270
+request:
+  url: "{{baseUrl}}/api/authors/:id"
+  method: PUT
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  pathVariables:
+    - key: id
+      value: string
+      description: Resource identifier (Mongo ObjectId)
+  body:
+    type: json
+    content: |-
+      {
+        "name": "string",
+        "bio": "string",
+        "birthDate": "1954-09-15"
+      }
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "name": "string",
+        "_id": "string",
+        "bio": "string",
+        "birthDate": "1961-11-24",
+        "books": [
+          "string",
+          "string"
+        ],
+        "createdAt": "2026-02-08T07:07:35.689Z",
+        "updatedAt": "2007-09-16T08:06:20.375Z"
+      }
+order: 1000

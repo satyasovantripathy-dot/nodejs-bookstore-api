@@ -1,0 +1,17 @@
+$kind: http-request
+id: 46ac6c3e-79b8-4aba-ab0a-8ffaee9b5525
+url: "{{baseUrl}}/u/login"
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "ICk@SyjvBJfTeIqoR.mya",
+      "password": "string"
+    }
+settings: {}
+examples: ./.resources/Log in and receive a JWT.resources/examples
+order: 1000

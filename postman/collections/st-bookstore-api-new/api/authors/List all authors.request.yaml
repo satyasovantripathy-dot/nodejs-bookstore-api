@@ -1,0 +1,9 @@
+$kind: http-request
+id: ac44ebde-c5ba-488b-853f-77e6b6cfd1f8
+url: "{{baseUrl}}/api/authors"
+method: GET
+headers:
+  Accept: application/json
+settings: {}
+examples: ./.resources/List all authors.resources/examples
+order: 2000

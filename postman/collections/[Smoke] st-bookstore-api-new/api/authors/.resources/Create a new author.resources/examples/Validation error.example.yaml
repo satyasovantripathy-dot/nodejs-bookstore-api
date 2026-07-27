@@ -1,0 +1,34 @@
+$kind: http-example
+id: 5f43ea47-7faa-4eb7-b6aa-fa984cdaa3b0
+request:
+  url: "{{baseUrl}}/api/authors"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      {
+        "name": "string",
+        "bio": "string",
+        "birthDate": "1954-09-15"
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "status": "string",
+        "message": "string"
+      }
+order: 2000

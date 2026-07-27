@@ -1,0 +1,13 @@
+$kind: http-request
+id: ba2ee07e-1ac1-4105-87a2-5c0b0f385a4c
+url: "{{baseUrl}}/api/books/delete/:id"
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: string
+    description: Resource identifier (Mongo ObjectId)
+settings: {}
+examples: ./.resources/Delete a book.resources/examples
+order: 1000

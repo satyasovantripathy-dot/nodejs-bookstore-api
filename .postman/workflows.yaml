@@ -1,0 +1,26 @@
+workflows:
+  syncSpecToCollection:
+    - spec: ../docs/swagger.json
+      collection: ../postman/collections/st-bookstore-api-new
+      options:
+        parametersResolution: Example
+        requestNameSource: Fallback
+        folderStrategy: Paths
+      syncOptions:
+        syncExamples: true
+    - spec: ../docs/swagger.json
+      collection: ../postman/collections/[Smoke] st-bookstore-api-new
+      options:
+        parametersResolution: Example
+        requestNameSource: Fallback
+        folderStrategy: Paths
+      syncOptions:
+        syncExamples: true
+    - spec: ../docs/swagger.json
+      collection: ../postman/collections/[Contract] st-bookstore-api-new
+      options:
+        parametersResolution: Example
+        requestNameSource: Fallback
+        folderStrategy: Paths
+      syncOptions:
+        syncExamples: true

@@ -1,0 +1,38 @@
+$kind: http-example
+id: df63e5c1-92c2-4c71-8937-5700ec451bc5
+request:
+  url: "{{baseUrl}}/api/books/addBook"
+  method: POST
+  headers:
+    - key: Content-Type
+      value: application/json
+    - key: Accept
+      value: application/json
+    - key: Authorization
+      value: Bearer <token>
+      description: "Added as a part of security scheme: bearer"
+  body:
+    type: json
+    content: |-
+      {
+        "bookId": "string",
+        "title": "string",
+        "author": "string",
+        "description": "string",
+        "publishedYear": 8097,
+        "genre": "string",
+        "coverImage": "https://ImpubecrRPkRLZHNQfMAUM.xyuRVYA.DXwBCQ18WYAhtC5dEzvpLxGqbqmZUQV6bPMFDep7UsmaILVkA"
+      }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "status": "string",
+        "message": "string"
+      }
+order: 2000

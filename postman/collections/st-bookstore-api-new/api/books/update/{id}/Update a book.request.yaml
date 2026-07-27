@@ -1,0 +1,26 @@
+$kind: http-request
+id: 0c4d3a88-5ebc-4f2b-ac3b-11d5ce7526ae
+url: "{{baseUrl}}/api/books/update/:id"
+method: PATCH
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: string
+    description: Resource identifier (Mongo ObjectId)
+body:
+  type: json
+  content: |-
+    {
+      "bookId": "string",
+      "title": "string",
+      "author": "string",
+      "description": "string",
+      "publishedYear": 8097,
+      "genre": "string",
+      "coverImage": "https://ImpubecrRPkRLZHNQfMAUM.xyuRVYA.DXwBCQ18WYAhtC5dEzvpLxGqbqmZUQV6bPMFDep7UsmaILVkA"
+    }
+settings: {}
+examples: ./.resources/Update a book.resources/examples
+order: 1000
