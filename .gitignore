@@ -34,7 +34,6 @@ out/
 # Debug
 *.swp
 *.swo
-*.sw*
 
 # OS-specific
 .DS_Store

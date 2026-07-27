@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Bookstore - Books API",
+    "title": "Bookstore - Authors API",
     "version": "1.0.0",
-    "description": "Book catalog management for the Bookstore platform.",
+    "description": "Author management for the Bookstore platform.",
     "contact": {
       "name": "Bookstore Platform Team",
       "email": "satyasovan.tripathy@postman.com"
@@ -29,93 +29,58 @@
   ],
   "tags": [
     {
-      "name": "Books",
-      "description": "Book catalog operations"
+      "name": "Authors",
+      "description": "Author operations"
     }
   ],
   "paths": {
-    "/api/books": {
+    "/api/authors": {
       "get": {
-        "summary": "List all books",
-        "operationId": "listBooks",
+        "summary": "List all authors",
+        "operationId": "listAuthors",
         "tags": [
-          "Books"
+          "Authors"
         ],
         "security": [],
-        "x-contract-test-stub": "GET /books verifies 200 with non-empty books array",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 10
-            }
-          }
-        ],
         "responses": {
           "200": {
-            "description": "A paginated list of books",
+            "description": "A list of authors",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "OK"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Book"
-                      }
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Author"
                   }
                 }
               }
             }
           }
         }
-      }
-    },
-    "/api/books/addBook": {
+      },
       "post": {
-        "summary": "Create a new book",
-        "operationId": "addBook",
+        "summary": "Create a new author",
+        "operationId": "addAuthor",
         "tags": [
-          "Books"
+          "Authors"
         ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BookInput"
+                "$ref": "#/components/schemas/AuthorInput"
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Book created",
+            "description": "Author created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Book"
+                  "$ref": "#/components/schemas/Author"
                 }
               }
             }
@@ -133,12 +98,12 @@
         }
       }
     },
-    "/api/books/{id}": {
+    "/api/authors/{id}": {
       "get": {
-        "summary": "Get a book by ID",
-        "operationId": "getBookById",
+        "summary": "Get an author by ID",
+        "operationId": "getAuthorById",
         "tags": [
-          "Books"
+          "Authors"
         ],
         "security": [],
         "parameters": [
@@ -148,17 +113,17 @@
         ],
         "responses": {
           "200": {
-            "description": "Book found",
+            "description": "Author found",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Book"
+                  "$ref": "#/components/schemas/Author"
                 }
               }
             }
           },
           "404": {
-            "description": "Book not found",
+            "description": "Author not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -168,14 +133,12 @@
             }
           }
         }
-      }
-    },
-    "/api/books/update/{id}": {
-      "patch": {
-        "summary": "Update a book",
-        "operationId": "updateBook",
+      },
+      "put": {
+        "summary": "Update an author",
+        "operationId": "updateAuthor",
         "tags": [
-          "Books"
+          "Authors"
         ],
         "parameters": [
           {
@@ -187,24 +150,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BookInput"
+                "$ref": "#/components/schemas/AuthorInput"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Book updated",
+            "description": "Author updated",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Book"
+                  "$ref": "#/components/schemas/Author"
                 }
               }
             }
           },
           "404": {
-            "description": "Book not found",
+            "description": "Author not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -214,14 +177,12 @@
             }
           }
         }
-      }
-    },
-    "/api/books/delete/{id}": {
+      },
       "delete": {
-        "summary": "Delete a book",
-        "operationId": "deleteBook",
+        "summary": "Delete an author",
+        "operationId": "deleteAuthor",
         "tags": [
-          "Books"
+          "Authors"
         ],
         "parameters": [
           {
@@ -230,10 +191,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Book deleted"
+            "description": "Author deleted"
           },
           "404": {
-            "description": "Book not found",
+            "description": "Author not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -266,35 +227,29 @@
       }
     },
     "schemas": {
-      "Book": {
+      "Author": {
         "type": "object",
         "properties": {
           "_id": {
             "type": "string",
             "readOnly": true
           },
-          "bookId": {
+          "name": {
             "type": "string"
           },
-          "title": {
+          "bio": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
-          },
-          "publishedYear": {
-            "type": "integer"
-          },
-          "genre": {
-            "type": "string"
-          },
-          "author": {
+          "birthDate": {
             "type": "string",
-            "description": "Author ObjectId reference"
+            "format": "date"
           },
-          "coverImage": {
-            "type": "string",
-            "format": "uri"
+          "books": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Book ObjectId reference"
+            }
           },
           "createdAt": {
             "type": "string",
@@ -308,42 +263,25 @@
           }
         },
         "required": [
-          "bookId",
-          "title",
-          "author"
+          "name"
         ]
       },
-      "BookInput": {
+      "AuthorInput": {
         "type": "object",
         "properties": {
-          "bookId": {
+          "name": {
             "type": "string"
           },
-          "title": {
+          "bio": {
             "type": "string"
           },
-          "description": {
-            "type": "string"
-          },
-          "publishedYear": {
-            "type": "integer"
-          },
-          "genre": {
-            "type": "string"
-          },
-          "author": {
+          "birthDate": {
             "type": "string",
-            "description": "Author ObjectId reference"
-          },
-          "coverImage": {
-            "type": "string",
-            "format": "uri"
+            "format": "date"
           }
         },
         "required": [
-          "bookId",
-          "title",
-          "author"
+          "name"
         ]
       },
       "Error": {
