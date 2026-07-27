@@ -1,0 +1,36 @@
+name: Postman Repo Sync
+
+# Pulls changes made in the Postman cloud workspace (e.g. smoke-collection
+# assertions) back into this repo. Manual trigger to avoid looping with the
+# bootstrap workflow (which runs on push to main).
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  repo-sync:
+    name: Sync Postman into repo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Resolve Postman service token
+        id: resolve-token
+        uses: postman-cs/postman-resolve-service-token-action@v2
+        with:
+          postman-region: us
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+
+      - name: Sync Postman assets into repo
+        uses: postman-cs/postman-repo-sync-action@v2
+        with:
+          project-name: st-bookstore-api-new
+          postman-region: us
+          postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+          postman-access-token: ${{ steps.resolve-token.outputs.token }}
+          team-id: ${{ steps.resolve-token.outputs.team-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
