@@ -9,20 +9,8 @@ name: Postman Bootstrap
 
 jobs:
   bootstrap:
-    name: bootstrap ${{ matrix.project }}
+    name: bootstrap st-bookstore-api-new
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - spec: docs/swagger.json
-            project: bookstore-books
-          - spec: docs/authors.swagger.json
-            project: bookstore-authors
-          - spec: docs/users.swagger.json
-            project: bookstore-users
-          - spec: docs/platform.swagger.json
-            project: bookstore-platform
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -37,8 +25,8 @@ jobs:
       - name: Bootstrap Postman workspace
         uses: postman-cs/postman-bootstrap-action@v2
         with:
-          spec-path: ${{ matrix.spec }}
-          project-name: ${{ matrix.project }}
+          spec-path: docs/swagger.json
+          project-name: st-bookstore-api-new
           workspace-team-id: '177513'
           postman-region: us
           postman-api-key: ${{ secrets.POSTMAN_API_KEY }}

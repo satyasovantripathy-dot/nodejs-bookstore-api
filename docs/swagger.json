@@ -1,93 +1,43 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Bookstore - Books API",
-    "version": "1.0.1",
-    "description": "Book catalog management for the Bookstore platform.",
+    "title": "Bookstore API Spec",
+    "version": "1.0.0",
+    "description": "Bookstore microservice API — books, authors, users/auth, and platform ops.",
     "contact": {
       "name": "Bookstore Platform Team",
       "email": "satyasovan.tripathy@postman.com"
     },
-    "license": {
-      "name": "ISC"
-    }
+    "license": { "name": "ISC" }
   },
   "servers": [
-    {
-      "url": "https://bo-d225e84afdf94a038e1955bfff5e8c50.ecs.us-east-1.on.aws",
-      "description": "AWS dev (ECS Express)"
-    },
-    {
-      "url": "http://localhost:3000",
-      "description": "Local development"
-    }
+    { "url": "https://bo-d225e84afdf94a038e1955bfff5e8c50.ecs.us-east-1.on.aws", "description": "AWS dev (ECS Express)" },
+    { "url": "http://localhost:3000", "description": "Local development" }
   ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
+  "security": [{ "bearerAuth": [] }],
   "tags": [
-    {
-      "name": "Books",
-      "description": "Book catalog operations"
-    }
+    { "name": "Books", "description": "Book catalog operations" },
+    { "name": "Authors", "description": "Author operations" },
+    { "name": "Auth", "description": "Registration and login" },
+    { "name": "Users", "description": "User profile" },
+    { "name": "Ops", "description": "Health and readiness probes" }
   ],
   "paths": {
     "/api/books": {
       "get": {
         "summary": "List all books",
         "operationId": "listBooks",
-        "tags": [
-          "Books"
-        ],
+        "tags": ["Books"],
         "security": [],
         "x-contract-test-stub": "GET /books verifies 200 with non-empty books array",
         "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "default": 1
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100,
-              "default": 10
-            }
-          }
+          { "name": "page", "in": "query", "required": false, "schema": { "type": "integer", "minimum": 1, "default": 1 } },
+          { "name": "limit", "in": "query", "required": false, "schema": { "type": "integer", "minimum": 1, "maximum": 100, "default": 10 } }
         ],
         "responses": {
           "200": {
             "description": "A paginated list of books",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "example": "OK"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Book"
-                      }
-                    }
-                  }
-                }
-              }
-            }
+            "content": { "application/json": { "schema": { "type": "object", "properties": { "status": { "type": "string", "example": "OK" }, "data": { "type": "array", "items": { "$ref": "#/components/schemas/Book" } } } } } }
           }
         }
       }
@@ -96,40 +46,11 @@
       "post": {
         "summary": "Create a new book",
         "operationId": "addBook",
-        "tags": [
-          "Books"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BookInput"
-              }
-            }
-          }
-        },
+        "tags": ["Books"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BookInput" } } } },
         "responses": {
-          "201": {
-            "description": "Book created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Book"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
+          "201": { "description": "Book created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Book" } } } },
+          "400": { "description": "Validation error", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
         }
       }
     },
@@ -137,36 +58,12 @@
       "get": {
         "summary": "Get a book by ID",
         "operationId": "getBookById",
-        "tags": [
-          "Books"
-        ],
+        "tags": ["Books"],
         "security": [],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/IdParam"
-          }
-        ],
+        "parameters": [{ "$ref": "#/components/parameters/IdParam" }],
         "responses": {
-          "200": {
-            "description": "Book found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Book"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Book not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
+          "200": { "description": "Book found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Book" } } } },
+          "404": { "description": "Book not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
         }
       }
     },
@@ -174,45 +71,12 @@
       "patch": {
         "summary": "Update a book",
         "operationId": "updateBook",
-        "tags": [
-          "Books"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/IdParam"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BookInput"
-              }
-            }
-          }
-        },
+        "tags": ["Books"],
+        "parameters": [{ "$ref": "#/components/parameters/IdParam" }],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/BookInput" } } } },
         "responses": {
-          "200": {
-            "description": "Book updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Book"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Book not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
+          "200": { "description": "Book updated", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Book" } } } },
+          "404": { "description": "Book not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
         }
       }
     },
@@ -220,142 +84,221 @@
       "delete": {
         "summary": "Delete a book",
         "operationId": "deleteBook",
-        "tags": [
-          "Books"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/IdParam"
-          }
-        ],
+        "tags": ["Books"],
+        "parameters": [{ "$ref": "#/components/parameters/IdParam" }],
         "responses": {
-          "200": {
-            "description": "Book deleted"
-          },
-          "404": {
-            "description": "Book not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
+          "200": { "description": "Book deleted" },
+          "404": { "description": "Book not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/api/authors": {
+      "get": {
+        "summary": "List all authors",
+        "operationId": "listAuthors",
+        "tags": ["Authors"],
+        "security": [],
+        "responses": {
+          "200": { "description": "A list of authors", "content": { "application/json": { "schema": { "type": "array", "items": { "$ref": "#/components/schemas/Author" } } } } }
+        }
+      },
+      "post": {
+        "summary": "Create a new author",
+        "operationId": "addAuthor",
+        "tags": ["Authors"],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AuthorInput" } } } },
+        "responses": {
+          "201": { "description": "Author created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Author" } } } },
+          "400": { "description": "Validation error", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/api/authors/{id}": {
+      "get": {
+        "summary": "Get an author by ID",
+        "operationId": "getAuthorById",
+        "tags": ["Authors"],
+        "security": [],
+        "parameters": [{ "$ref": "#/components/parameters/IdParam" }],
+        "responses": {
+          "200": { "description": "Author found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Author" } } } },
+          "404": { "description": "Author not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "put": {
+        "summary": "Update an author",
+        "operationId": "updateAuthor",
+        "tags": ["Authors"],
+        "parameters": [{ "$ref": "#/components/parameters/IdParam" }],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AuthorInput" } } } },
+        "responses": {
+          "200": { "description": "Author updated", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Author" } } } },
+          "404": { "description": "Author not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      },
+      "delete": {
+        "summary": "Delete an author",
+        "operationId": "deleteAuthor",
+        "tags": ["Authors"],
+        "parameters": [{ "$ref": "#/components/parameters/IdParam" }],
+        "responses": {
+          "200": { "description": "Author deleted" },
+          "404": { "description": "Author not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/u/register": {
+      "post": {
+        "summary": "Register a new user",
+        "operationId": "registerUser",
+        "tags": ["Auth"],
+        "security": [],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RegisterInput" } } } },
+        "responses": {
+          "201": { "description": "User registered", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+          "400": { "description": "Validation error", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/u/login": {
+      "post": {
+        "summary": "Log in and receive a JWT",
+        "operationId": "loginUser",
+        "tags": ["Auth"],
+        "security": [],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/LoginInput" } } } },
+        "responses": {
+          "200": { "description": "Authentication successful", "content": { "application/json": { "schema": { "type": "object", "properties": { "token": { "type": "string", "description": "JWT access token" }, "user": { "$ref": "#/components/schemas/User" } } } } } },
+          "401": { "description": "Invalid credentials", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/u/me": {
+      "get": {
+        "summary": "Get the authenticated user's profile",
+        "operationId": "getProfile",
+        "tags": ["Users"],
+        "responses": {
+          "200": { "description": "Current user profile", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+          "401": { "description": "Missing or invalid token", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Liveness probe",
+        "operationId": "getHealth",
+        "tags": ["Ops"],
+        "security": [],
+        "responses": {
+          "200": { "description": "Service is healthy", "content": { "application/json": { "schema": { "type": "object", "properties": { "status": { "type": "string", "example": "ok" }, "service": { "type": "string", "example": "nodejs-bookstore-api" } }, "required": ["status"] } } } }
+        }
+      }
+    },
+    "/readyz": {
+      "get": {
+        "summary": "Readiness probe",
+        "operationId": "getReadiness",
+        "tags": ["Ops"],
+        "security": [],
+        "responses": {
+          "200": { "description": "Service is ready", "content": { "application/json": { "schema": { "type": "object", "properties": { "status": { "type": "string", "example": "ready" }, "dependencies": { "type": "object", "properties": { "database": { "type": "string", "example": "connected" } } } } } } } },
+          "503": { "description": "Service not ready", "content": { "application/json": { "schema": { "type": "object", "properties": { "status": { "type": "string", "example": "not_ready" } } } } } }
         }
       }
     }
   },
   "components": {
     "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
-      }
+      "bearerAuth": { "type": "http", "scheme": "bearer", "bearerFormat": "JWT" }
     },
     "parameters": {
-      "IdParam": {
-        "name": "id",
-        "in": "path",
-        "required": true,
-        "description": "Resource identifier (Mongo ObjectId)",
-        "schema": {
-          "type": "string"
-        }
-      }
+      "IdParam": { "name": "id", "in": "path", "required": true, "description": "Resource identifier (Mongo ObjectId)", "schema": { "type": "string" } }
     },
     "schemas": {
       "Book": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "readOnly": true
-          },
-          "bookId": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "publishedYear": {
-            "type": "integer"
-          },
-          "genre": {
-            "type": "string"
-          },
-          "author": {
-            "type": "string",
-            "description": "Author ObjectId reference"
-          },
-          "coverImage": {
-            "type": "string",
-            "format": "uri"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time",
-            "readOnly": true
-          }
+          "_id": { "type": "string", "readOnly": true },
+          "bookId": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "publishedYear": { "type": "integer" },
+          "genre": { "type": "string" },
+          "author": { "type": "string", "description": "Author ObjectId reference" },
+          "coverImage": { "type": "string", "format": "uri" },
+          "createdAt": { "type": "string", "format": "date-time", "readOnly": true },
+          "updatedAt": { "type": "string", "format": "date-time", "readOnly": true }
         },
-        "required": [
-          "bookId",
-          "title",
-          "author"
-        ]
+        "required": ["bookId", "title", "author"]
       },
       "BookInput": {
         "type": "object",
         "properties": {
-          "bookId": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "publishedYear": {
-            "type": "integer"
-          },
-          "genre": {
-            "type": "string"
-          },
-          "author": {
-            "type": "string",
-            "description": "Author ObjectId reference"
-          },
-          "coverImage": {
-            "type": "string",
-            "format": "uri"
-          }
+          "bookId": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "publishedYear": { "type": "integer" },
+          "genre": { "type": "string" },
+          "author": { "type": "string", "description": "Author ObjectId reference" },
+          "coverImage": { "type": "string", "format": "uri" }
         },
-        "required": [
-          "bookId",
-          "title",
-          "author"
-        ]
+        "required": ["bookId", "title", "author"]
+      },
+      "Author": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string", "readOnly": true },
+          "name": { "type": "string" },
+          "bio": { "type": "string" },
+          "birthDate": { "type": "string", "format": "date" },
+          "books": { "type": "array", "items": { "type": "string", "description": "Book ObjectId reference" } },
+          "createdAt": { "type": "string", "format": "date-time", "readOnly": true },
+          "updatedAt": { "type": "string", "format": "date-time", "readOnly": true }
+        },
+        "required": ["name"]
+      },
+      "AuthorInput": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "bio": { "type": "string" },
+          "birthDate": { "type": "string", "format": "date" }
+        },
+        "required": ["name"]
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string", "readOnly": true },
+          "userId": { "type": "string" },
+          "username": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "role": { "type": "string", "enum": ["user", "admin"] },
+          "createdAt": { "type": "string", "format": "date-time", "readOnly": true }
+        },
+        "required": ["userId", "username", "email"]
+      },
+      "RegisterInput": {
+        "type": "object",
+        "properties": {
+          "username": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string", "format": "password", "minLength": 6 }
+        },
+        "required": ["username", "email", "password"]
+      },
+      "LoginInput": {
+        "type": "object",
+        "properties": {
+          "email": { "type": "string", "format": "email" },
+          "password": { "type": "string", "format": "password" }
+        },
+        "required": ["email", "password"]
       },
       "Error": {
         "type": "object",
-        "properties": {
-          "status": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          }
-        }
+        "properties": { "status": { "type": "string" }, "message": { "type": "string" } }
       }
     }
   }
