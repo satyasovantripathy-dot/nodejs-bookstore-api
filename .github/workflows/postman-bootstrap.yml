@@ -2,27 +2,44 @@ name: Postman Bootstrap
 
 "on":
   push:
-    branches:
-      - main
+    branches: [main]
+    paths:
+      - 'docs/**'
+  workflow_dispatch:
 
 jobs:
   bootstrap:
+    name: bootstrap ${{ matrix.project }}
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - spec: docs/swagger.json
+            project: bookstore-books
+          - spec: docs/authors.swagger.json
+            project: bookstore-authors
+          - spec: docs/users.swagger.json
+            project: bookstore-users
+          - spec: docs/platform.swagger.json
+            project: bookstore-platform
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Resolve Postman service token
         id: resolve-token
-        uses: postman-cs/postman-resolve-service-token-action@main
+        uses: postman-cs/postman-resolve-service-token-action@v2
         with:
+          postman-region: us
           postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
 
       - name: Bootstrap Postman workspace
-        uses: postman-cs/postman-bootstrap-action@main
+        uses: postman-cs/postman-bootstrap-action@v2
         with:
-          spec-path: docs/swagger.json
-          project-name: nodejs-bookstore-api
+          spec-path: ${{ matrix.spec }}
+          project-name: ${{ matrix.project }}
           workspace-team-id: '177513'
+          postman-region: us
           postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
+          postman-access-token: ${{ steps.resolve-token.outputs.token }}
