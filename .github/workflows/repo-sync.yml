@@ -29,6 +29,7 @@ jobs:
         uses: postman-cs/postman-repo-sync-action@v2
         with:
           project-name: st-bookstore-api-new
+          workspace-id: 932f09f7-9a12-4bd6-b589-9b56352f9b76
           generate-ci-workflow: false
           postman-region: us
           postman-api-key: ${{ secrets.POSTMAN_API_KEY }}
